@@ -21,7 +21,7 @@
                 <div class="form-group">
                         <label for="borda">Borda da Pizza:</label>
                         <select name="borda" id="borda" class="form-control">
-                            <option value="">Selecione a borda</option>
+                            <option value="">Selecione a Borda</option>
                         </select>
                     </div>
                     
@@ -32,6 +32,14 @@
                         </select>
                     </div>
 
+                    <div class="form-group">
+                        <label for="sabor">Sabores (máximo 3):</label>
+                        <select multiple name="sabor[]" id="sabor" class="form-control"></select>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Enviar Pedido" class="btn btn-primary">
+                    </div>
+                    
                 </form>
             </div>
         </div>

@@ -18,6 +18,65 @@ a.nav-link{
     color: #FFF;
 }
 
+/* MAIN CONTENT */
+#main-banner {
+    background-image: url('../img/pizza-banner.jpg');
+    height: 300px;
+    background-position:center;
+    background-size: cover;
+    width: 100%;
+    background-position-y: -300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#main-banner h1,
+#main-banner p {
+    color: #FFF;
+    background-color: rgba(0, 0, 0, 0.5);
+    text-align: center;
+    padding: 10px;
+    font-size: 3rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+#main-banner p { 
+    font-size: 1.5rem;
+}
+
+#main-container{
+    padding: 20px;
+    min-height: calc(100vh - 175px - 300px); /* Adjust height considering footer and banner */
+    margin-bottom: 100px; /* Space for footer */
+}
+
+#main-container h2,
+#main-container p {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.row {
+    margin: 0;
+}
+
+#pizza_form {
+    max-width: 550px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+#pizza_form label {
+    font-weight: bold;
+}
+
+.btn.btn-primary {
+    background-color: #000;
+    border-color: #000;
+    
+}
 
 /* FOOTER */
 footer {
