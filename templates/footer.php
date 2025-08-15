@@ -1,5 +1,5 @@
     <footer>
-        <p>&copy; 2023 Pizzaria. Todos os direitos reservados.</p>
+        <p>&copy; <?= date('Y') ?> Pizzaria. Todos os direitos reservados.</p>
     </footer>   
 
     <!-- Bootstrap JS and dependencies -->

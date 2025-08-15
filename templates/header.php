@@ -25,6 +25,7 @@
             <a href="index.php" class="navbar-brand">
                 <img src="img/pizza.svg" alt="Pizzaria Logo" id="brand-logo">
             </a>
+
             <div class="collapse navbar-collapse" id="nav-bar">
                 <ul class="navbar-nav">
                     <li class="nav-item active">
@@ -32,5 +33,6 @@
                     </li>
                 </ul>
             </div>
+            
         </nav>
     </header>   
