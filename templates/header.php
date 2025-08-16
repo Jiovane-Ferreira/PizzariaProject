@@ -20,7 +20,6 @@
 
 <body>
     <header>
-        <h1>Bem-vindo à Pizzaria</h1>
         <nav class="navbar navbar-expand-lg">
             <a href="index.php" class="navbar-brand">
                 <img src="img/pizza.svg" alt="Pizzaria Logo" id="brand-logo">
@@ -33,6 +32,9 @@
                     </li>
                 </ul>
             </div>
-            
+
         </nav>
-    </header>   
+    </header>
+    <div class="alert alert-success">
+        <p>Pedido realizado como sucesso!</p>
+    </div>   

@@ -17,6 +17,26 @@ nav.navbar.navbar-expand-lg {
 a.nav-link{
     color: #FFF;
 }
+/* ALERTAS */
+.alert {
+    border-radius: 0;
+    text-align: center;
+    margin-bottom: 0;
+    font-weight: bold;
+    padding: 10px;
+    font-size: 1.2rem;
+}
+
+.alert.alert-success {
+    border: 2px solid #28a745;
+}
+
+
+.alert.alert-warning {
+    border: 2px solid #856404;
+}
+
+
 
 /* MAIN CONTENT */
 #main-banner {

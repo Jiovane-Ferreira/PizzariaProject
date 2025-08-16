@@ -3,6 +3,9 @@
     // This file is the main entry point for the application.
     // It includes the header template and can be extended with more functionality.
     include_once('templates/header.php');
+
+    // Include the pizza processing file to handle pizza-related operations
+    include_once('process/pizza.php');
 ?>
 
 <div id="main-banner">
