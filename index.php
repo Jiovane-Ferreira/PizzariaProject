@@ -13,7 +13,7 @@
     <p>Escolha entre nossas deliciosas opções e faça seu pedido agora mesmo!</p>
 </div>
 
-<div id="main-container">
+<div class="main-container">
     <div class="container">
         <div class="row">
             <div class="col-md-12">

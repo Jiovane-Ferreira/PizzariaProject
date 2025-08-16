@@ -4,6 +4,11 @@ html, body {
     padding: 0;
 }
 
+body {
+    display: flex;
+    flex-direction: column;
+}
+
 /* NAV BAR */
 #brand-logo {
     width: 50px;
@@ -66,14 +71,12 @@ a.nav-link{
     font-size: 1.5rem;
 }
 
-#main-container{
-    padding: 20px;
-    min-height: calc(100vh - 175px - 300px); /* Adjust height considering footer and banner */
-    margin-bottom: 100px; /* Space for footer */
+.main-container{
+    flex: 1;
 }
 
-#main-container h2,
-#main-container p {
+.main-container h2,
+.main-container p {
     text-align: center;
     margin-bottom: 20px;
 }
@@ -98,8 +101,40 @@ a.nav-link{
     
 }
 
+/*DASHBOARD*/
+.delete-btn, 
+.update-btn {
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+}
+
+.delete-btn {
+    padding-top: 10px;
+    color: #721c24;
+    
+}
+
+.update-btn {
+    color: #004085;
+    margin-left: 10px;
+}
+
+.update-form {
+    display: flex;    
+}
+
+.status-input {
+    width: 65%;
+}
+
+.table ul {
+    text-align: left;
+}
+
 /* FOOTER */
 footer {
+    margin-top: auto;
     background-color: #000;
     color: #FFF;
     font-weight: bold;
