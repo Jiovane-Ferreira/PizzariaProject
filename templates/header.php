@@ -1,3 +1,25 @@
+<?php
+
+// Include the connection file to establish a database connection
+include_once('process/connection.php'); 
+// Include the pizza processing file to handle pizza-related operations
+include_once('process/pizza.php');
+
+$msg = "";
+
+if (isset($_SESSION['msg'])) {
+    
+    $msg = $_SESSION['msg'];
+    $status = $_SESSION['status'];
+
+    unset($_SESSION['msg']);
+    unset($_SESSION['status']);
+}   
+
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="PT-BR">
     
@@ -35,6 +57,8 @@
 
         </nav>
     </header>
-    <div class="alert alert-success">
-        <p>Pedido realizado como sucesso!</p>
-    </div>   
+    <?php if ($msg != ""): ?>
+        <div class="alert alert-<?= $status ?> alert-dismissible fade show" role="alert">
+            <p><?= $msg ?></p>
+        </div>
+    <?php endif; ?>   
