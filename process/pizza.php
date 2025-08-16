@@ -18,9 +18,9 @@ if ($method === 'GET') {
 // criação do pedido
 } else if ($method === 'POST') {
 
-    $borda = $_POST['borda'] ?? null;
-    $massa = $_POST['massa'] ?? null;
-    $sabores = $_POST['sabor'] ?? [];
+    $borda = $_POST['borda'];
+    $massa = $_POST['massa'];
+    $sabores = $_POST['sabor'];
 
     if (empty($borda) || empty($massa) || empty($sabores)) {
         echo "Por favor, preencha todos os campos.";
@@ -32,15 +32,56 @@ if ($method === 'GET') {
         $_SESSION['msg'] = "Você pode selecionar no máximo 3 sabores.";
         $_SESSION['status'] = "warning";
 
-    } else {
+        } else {
         
-        echo "Passou da validação";
-        exit;
+        try {
+            // Inserção dos sabores no banco de dados
+            $stmt = $conn->prepare("INSERT INTO pizzas(id_borda, id_massa) VALUES (:id_borda, :id_massa)");
+         
+            foreach ($sabores as $sabor) {
+                $stmt->bindParam(':id_borda', $borda, PDO::PARAM_INT);
+                $stmt->bindParam(':id_massa', $massa, PDO::PARAM_INT);
+                $stmt->execute();
+            }
 
-    }
+            $pizzaId = $conn->lastInsertId();
 
-     header('Location: ../index.php');
+            $stmt = $conn->prepare("INSERT INTO pizza_sabor (id_pizza, id_sabor) VALUES (:id_pizza, :id_sabor)");
+            foreach ($sabores as $sabor) {
+                $stmt->bindParam(':id_pizza', $pizzaId, PDO::PARAM_INT);
+                $stmt->bindParam(':id_sabor', $sabor, PDO::PARAM_INT);
+                $stmt->execute();
+            }  
 
-} 
+             //criar o pedido da pizza
+            $stmt = $conn->prepare("INSERT INTO pedidos(id_pizza, id_status) 
+            VALUES (:pizza, :status)");
+            $statusId = 1; // status 1 é o status de pedido realizado, "em produção."
+
+            $stmt->bindParam(':pizza', $pizzaId, PDO::PARAM_INT);
+            $stmt->bindParam(':status', $statusId, PDO::PARAM_INT);
+            $stmt->execute();
+
+            // Mensagem de sucesso
+            echo "Pedido realizado com sucesso!";
+            $_SESSION['msg'] = "Pedido realizado com sucesso!";
+            $_SESSION['status'] = "success";
+            header("Location: ../index.php");
+            exit;
+
+            } catch (PDOException $e) {
+                echo "Erro ao inserir os sabores: " . $e->getMessage();
+            exit;
+       
+        }
+
+       
+
+
+    } 
+
+
+
+}
 
 ?>
