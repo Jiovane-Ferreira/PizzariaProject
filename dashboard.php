@@ -1,13 +1,7 @@
 <?php
-    // index.php
-    // This file is the main entry point for the application.
-    // It includes the header template and can be extended with more functionality.
-    include_once('templates/header.php');
-    
-    include_once('process/order.php');
-    // The order processing logic is included here, which handles GET requests to fetch orders.
-    
-    
+// index.php
+include_once('templates/header.php');
+include_once('process/order.php'); // aqui já temos $pizzas e $statusOptions disponíveis
 ?>
 
 <div class="main-container">
@@ -17,60 +11,67 @@
                 <h2>Gerenciar Pedidos</h2>
                 <p>Bem-vindo ao painel de controle. Aqui você pode gerenciar seus pedidos.</p>
             </div>
+
             <div class="col-md-12 table-container">
-                <table class="table">
+                <table class="table table-striped table-bordered">
                     <thead>
                         <tr>
-                            <th scope="col"><span>Id do Pedido</span> #</th>
-                            <th scope="col"><span>Borda</span> #</th>
-                            <th scope="col"><span>Massa</span> #</th>
-                            <th scope="col"><span>Sabores</span> #</th>
-                            <th scope="col"><span>Status</span> #</th>
-                            <th scope="col"><span>Ações</span> #</th>
+                            <th>Id do Pedido</th>
+                            <th>Borda</th>
+                            <th>Massa</th>
+                            <th>Sabores</th>
+                            <th>Status</th>
+                            <th>Ações</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>#1</td>
-                            <td>Cheddar</td>
-                            <td>Catupiry</td>
-                            <td>4 Quejos</td>
-                            
-                            <td>
-                                <form action="process/order.php" method="post" class="form-group update-form">
-                                    <input type="hidden" name="type" value="update">
-                                    <input type="hidden" name="order_id" value="1">
-                                    <select name="status" class="form-control status-input">
-                                        <option value="pending">Pendente</option>
-                                        <option value="preparing">Preparando</option>
-                                        <option value="delivered">Entregue</option>
-                                    </select>
-                                    <button type="submit" class="update-btn">
-                                        <i class="fas fa-sync-alt"></i>
-                                    </button>
-                                </form>    
-                            </td>
-
-                            <td>
-                                <form action="process/order.php" method="post">
-                                    <input type="hidden" name="type" value="delete">
-                                    <input type="hidden" name="order_id" value="1">
-                                    <button type="submit" class="delete-btn">
-                                        <i class="fas fa-times"></i>
-                                    </button>
-                                </form>
-                            </td>
-                        </tr>
+                        <?php if (!empty($pizzas)): ?>
+                            <?php foreach ($pizzas as $pizza): ?>
+                                <tr>
+                                    <td><?= htmlspecialchars($pizza['id_pedido']); ?></td>
+                                    <td><?= htmlspecialchars($pizza['borda']); ?></td>
+                                    <td><?= htmlspecialchars($pizza['massa']); ?></td>
+                                    <td>
+                                        <ul>
+                                            <?php foreach ($pizza['sabores'] as $sabor): ?>
+                                                <li><?= htmlspecialchars($sabor); ?></li>
+                                            <?php endforeach; ?>
+                                        </ul>
+                                    </td>
+                                    <td>
+                                        <form action="process/order.php" method="post" class="form-inline">
+                                            <input type="hidden" name="type" value="update">
+                                            <input type="hidden" name="id_pedido" value="<?= $pizza['id_pedido']; ?>">
+                                            <select name="status" class="form-control">
+                                                <?php foreach ($statusOptions as $statusId => $statusName): ?>
+                                                    <option value="<?= $statusId; ?>" <?= $pizza['status'] == $statusId ? 'selected' : ''; ?>>
+                                                        <?= htmlspecialchars($statusName); ?>
+                                                    </option>
+                                                <?php endforeach; ?>
+                                            </select>
+                                            <button type="submit" class="update-btn" title="Atualizar status">
+                                                <i class="fas fa-sync-alt"></i>
+                                            </button>
+                                        </form>
+                                    </td>
+                                    <td>
+                                        <a href="edit.php?id=<?= $pizza['id_pedido']; ?>" class="btn btn-primary btn-sm">Editar</a>
+                                        <a href="delete.php?id=<?= $pizza['id_pedido']; ?>" class="btn btn-danger btn-sm">Excluir</a>
+                                    </td>
+                                </tr>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <tr>
+                                <td colspan="6" class="text-center">Nenhum pedido encontrado.</td>
+                            </tr>
+                        <?php endif; ?>
                     </tbody>
-                    </thead>
                 </table>
             </div>
         </div>
     </div>
 </div>
 
-
 <?php
-    // Include the footer template
-    include_once('templates/footer.php');
+include_once('templates/footer.php');
 ?>
